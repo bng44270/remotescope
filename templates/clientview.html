@@ -1,0 +1,28 @@
+<html>
+<head><title>Remotescope</title></head>
+<body>
+	<div id="sessionview">
+	<img src="/client/{{ sessionid }}/screenshot.png" id="screenshot" width="600px" /><br/>
+	<a href="/client">Close</a>
+</div>
+<script type="text/javascript">
+	function refreshScreenshot () {
+		document.getElementById("screenshot").src='/client/{{ sessionid }}/screenshot.png?' + new Date().getTime();
+		setTimeout(refreshScreenshot, 3000);
+	}
+
+	function reloadPage() { location.reload(); }
+	
+	document.getElementById("screenshot").onerror = function() {
+ 		document.getElementById("sessionview").innerHTML = '<b>Session {{ sessionid }} is not in progress</b><br/>';
+	document.getElementById("sessionview").innerHTML += 'Page will refresh automatically in 3 seconds<br/>';
+		document.getElementById("sessionview").innerHTML += '<a href="/client">Return to Session List</a>';
+		setTimeout(reloadPage, 3000);
+	}
+
+	document.getElementById("screenshot").onload = function() {
+		setTimeout(refreshScreenshot, 3000);
+	}
+</script>
+</body>
+</html>

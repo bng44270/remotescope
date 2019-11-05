@@ -1,0 +1,13 @@
+<html>
+<head><title>Remotescope</title></head>
+<body>
+{% for thissession in sessionlist %}
+<a href="/client/{{ thissession }}">{{ thissession }}</a><br/>
+{% endfor %}
+	
+<script type="text/javascript">
+	function reloadPage() { location.reload(); }
+	setTimeout(reloadPage,3000);
+</script>
+</body>
+</html>
